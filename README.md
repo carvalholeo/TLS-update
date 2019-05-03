@@ -1,6 +1,6 @@
 # TLSv1.2
 
-O Conselho de Padrões de Segurança da Indústria de Cartões de Pagamento (PCI SSC) [determina](http://blog.pcisecuritystandards.org/migrating-from-ssl-and-early-tls) que **todos os processadores de cartão de crédito devem retirar versões desatualizadas do serviço de TLS conforme o prazo estabelecido pelo PCI.**.
+O Conselho de Padrões de Segurança da Indústria de Cartões de Pagamento (PCI SSC) [determina](http://blog.pcisecuritystandards.org/migrating-from-ssl-and-early-tls) que **todos os processadores de cartão de crédito devem retirar versões desatualizadas do serviço de TLS conforme o prazo estabelecido pelo PCI.**
 
 Atendendo as especificações, a **Gerencianet** está fazendo a atualização dos protocolos.
 
@@ -11,6 +11,7 @@ Esse repositório contém dicas e instruções para te ajudar a verificar se seu
 Para cada linguagem de programação, existe um guia diferente, para que você descubra se seu sistema é compatível com o TLS 1.2 ou não. Escolha sua linguagem abaixo e veja os requisitos para que tudo funcione perfeitamente.
 
 * [Node](#node)
+* [PHP](#php)
 
 * * *
 
@@ -30,19 +31,20 @@ Para cada linguagem de programação, existe um guia diferente, para que você d
 2. A versão do seu OpenSSL será exibida na propriedade `openssl`:
     ```
     {
-      http_parser: '2.7.0',
-      node: '8.6.0',
-      v8: '6.0.287.53',
-      uv: '1.14.1',
+      http_parser: '2.8.0',
+      node: '10.15.0',
+      v8: '6.8.275.32-node.45',
+      uv: '1.23.2',
       zlib: '1.2.11',
-      ares: '1.10.1-DEV',
-      modules: '57',
-      nghttp2: '1.25.0',
-      openssl: '1.0.2l',
-      icu: '59.1',
-      unicode: '9.0',
-      cldr: '31.0.1',
-      tz: '2017b' 
+      ares: '1.15.0',
+      modules: '64',
+      nghttp2: '1.34.0',
+      napi: '3',
+      openssl: '1.1.0j',
+      icu: '62.1',
+      unicode: '11.0',
+      cldr: '33.1',
+      tz: '2018e' 
     }
     ```
 
@@ -50,3 +52,43 @@ Para cada linguagem de programação, existe um guia diferente, para que você d
 
 1. Baixe o arquivo `tls.js` do nosso [repositório](Node/).
 2. Coloque-o em seu servidor, e execute-o com o comando `node tls.js`
+
+* * *
+
+### PHP
+
+#### Requisitos
+* Versão do PHP: >= 5.3 
+* Versão da biblioteca cURL: >= 7.34.0
+* Versão da biblioteca OpenSSL: >= 1.0.1c
+
+#### Guias
+
+Você pode encontrar informações sobre as bibliotecas OpenSSL dessa forma:
+
+1. OpenSSL instalado em seu SO: 
+    - Execute o comando `openssl version`.
+1. OpenSSL que seu PHP está utilizando:
+    - Procure essa informação dentro do arquivo `php.ini`.
+1. Para encontrar a versão do OpenSSL de seu cURL, execute o comando abaixo em seu servidor
+    ```
+    php -r 'echo json_encode(curl_version(), JSON_PRETTY_PRINT);'
+    ```
+
+Todas essas bibliotecas OpenSSL podem ser diferentes, e atualizar uma não atualizará a outra automaticamente.
+
+#### Executando exemplo de PHP
+
+1. Baixe o arquivo `tls.php` do nosso [repositório](PHP/).
+2. Coloque-o em seu servidor, e execute-o com o comando `php tls.php`
+
+* On success:
+        
+        ```
+        Gerencianet_Connection_TLS1.2_OK!
+        ```
+        
+    * On failure:
+            
+        ```
+        curl_error information

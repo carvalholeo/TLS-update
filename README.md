@@ -12,6 +12,8 @@ Para cada linguagem de programação, existe um guia diferente, para que você d
 
 * [Node](#node)
 * [PHP](#php)
+* [Python](#python)
+* [Ruby](#ruby)
 
 * * *
 
@@ -53,16 +55,25 @@ Para cada linguagem de programação, existe um guia diferente, para que você d
 1. Baixe o arquivo `tls.js` do nosso [repositório](Node/).
 2. Coloque-o em seu servidor, e execute-o com o comando `node tls.js`
 
+    * On success:    
+        ```
+        Gerencianet_Connection_TLS1.2_OK!
+        ```
+        
+    * On failure:
+        ```
+        curl_error information
+
 * * *
 
-### PHP
+## PHP
 
 #### Requisitos
 * Versão do PHP: >= 5.3 
 * Versão da biblioteca cURL: >= 7.34.0
 * Versão da biblioteca OpenSSL: >= 1.0.1c
 
-#### Guias
+#### Guia
 
 Você pode encontrar informações sobre as bibliotecas OpenSSL dessa forma:
 
@@ -82,13 +93,79 @@ Todas essas bibliotecas OpenSSL podem ser diferentes, e atualizar uma não atual
 1. Baixe o arquivo `tls.php` do nosso [repositório](PHP/).
 2. Coloque-o em seu servidor, e execute-o com o comando `php tls.php`
 
-* On success:
-        
+    * On success:    
         ```
         Gerencianet_Connection_TLS1.2_OK!
         ```
         
     * On failure:
-            
         ```
         curl_error information
+
+* * *
+
+## Python
+
+#### Requisitos
+
+* Python usa o OpenSSL fornecido pelo sistema.
+* TLSv1.2 precisa da versão OpenSSL 1.0.1c ou superior.
+
+#### Verificando sua conexão com TLS 1.2.
+
+1. Em um shell do seu **sistema de produção**, execute o seguinte comando: 
+
+    * Para Python 2.x:
+
+        ```
+        $ python -c "import urllib2; print(urllib2.urlopen('https://tls.testegerencianet.com.br').read())"
+        ```
+
+    * Para Python 3.x:
+
+        ```
+        $ python -c "import urllib.request; print(urllib.request.urlopen('https://tls.testegerencianet.com.br').read())"
+        ```
+    
+    * Ou execute o [arquivo](Python/tls.py) com o comando `python tls.py`
+
+        * On success:
+            
+            ```
+            Gerencianet_Connection_TLS1.2_OK!
+            ```
+        
+        * On failure, an `URLError` is raised:
+            
+            ```
+            urllib2.URLError: <urlopen error EOF occurred in violation of protocol (_ssl.c:590)>
+            urllib2.URLError: <urlopen error [Errno 54] Connection reset by peer>
+            ```
+
+* * *
+
+## Ruby
+
+#### Requisitos
+
+* Ruby 2.0.0 ou superior é necessário para usar TLSv1.2.
+* TLSv1.2 precisa da versão OpenSSL 1.0.1c ou superior.
+
+#### Verificando sua conexão com TLS 1.2.
+
+1. Em um shell do seu **sistema de produção**, execute o seguinte comando: 
+
+    * 
+    ```
+    $ ruby -r'net/http' -e 'puts Net::HTTP.get(URI("https://tls.testegerencianet.com.br/"))'
+    ```
+    
+    * Ou execute o [arquivo](Ruby/tls.rb) com o comando `ruby tls.rb`
+
+        * On success:
+            
+            ```
+            Gerencianet_Connection_TLS1.2_OK!
+            ```
+        
+        * On failure, uma exceção OpenSSL::SSL::SSLError or EOFError é lançada.

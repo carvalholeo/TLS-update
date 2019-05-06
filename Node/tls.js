@@ -1,7 +1,7 @@
 const https = require('https');
 
 const options = {
-  method: 'POST',
+  method: 'GET',
   hostname: 'tls.testegerencianet.com.br',
   path: '/'
 };

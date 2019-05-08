@@ -145,14 +145,14 @@ Todas essas bibliotecas OpenSSL podem ser diferentes, e atualizar uma não atual
 
 * * *
 
-### .NET
+## .NET
 
 #### Requisitos
 Para habilitar o funcionamento do protocolo TLSv1.2 em seu sistema, a única coisa necessária é utilizar a versão mais recente do Mono(linux) ou .NET Framework (maior que 4.5, recomendado >= 4.6.2).
 
 #### Verificando suas versões de .NET e TLS
 
-1. Execute o arquivo `Tls.exe`, que pode ser encontrado clicando [repositório](C#/):
+1. Execute o arquivo `Tls.exe`, que pode ser encontrado clicando [aqui](C%23/):
 
 ##### Windows:
   Execute o arquivo como qualquer outro `.exe` normalmente.

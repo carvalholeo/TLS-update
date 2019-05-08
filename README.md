@@ -13,6 +13,7 @@ Para cada linguagem de programação, existe um guia diferente, para que você d
 * [Node](#node)
 * [PHP](#php)
 * [Python](#python)
+* [.NET](#net)
 * [Ruby](#ruby)
 
 * * *
@@ -62,7 +63,7 @@ Para cada linguagem de programação, existe um guia diferente, para que você d
         
     * On failure:
         ```
-        curl_error information
+        Emitted 'error' event at
 
 * * *
 
@@ -144,6 +145,37 @@ Todas essas bibliotecas OpenSSL podem ser diferentes, e atualizar uma não atual
 
 * * *
 
+### .NET
+
+#### Requisitos
+Para habilitar o funcionamento do protocolo TLSv1.2 em seu sistema, a única coisa necessária é utilizar a versão mais recente do Mono(linux) ou .NET Framework (maior que 4.5, recomendado >= 4.6.2).
+
+#### Verificando suas versões de .NET e TLS
+
+1. Execute o arquivo `Tls.exe`, que pode ser encontrado clicando [repositório](C#/):
+
+##### Windows:
+  Execute o arquivo como qualquer outro `.exe` normalmente.
+
+##### Linux:
+  - Execute o comando a partir do `mono` da seguinte maneira:
+    ```
+    $ mono Tls.exe
+    ```
+
+  * On success:
+            
+            ```
+            Gerencianet_Connection_TLS1.2_OK!
+            ```
+        
+        * On failure, an `URLError` is raised:
+            
+            ```
+            Failed!
+
+* * *
+
 ## Ruby
 
 #### Requisitos
@@ -168,4 +200,4 @@ Todas essas bibliotecas OpenSSL podem ser diferentes, e atualizar uma não atual
             Gerencianet_Connection_TLS1.2_OK!
             ```
         
-        * On failure, uma exceção OpenSSL::SSL::SSLError or EOFError é lançada.
+        * On failure, uma exceção `OpenSSL::SSL::SSLError` or `EOFError` é lançada.

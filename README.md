@@ -15,6 +15,8 @@ Para cada linguagem de programação, existe um guia diferente, para que você d
 * [Python](#python)
 * [.NET](#net)
 * [Ruby](#ruby)
+* [Java](#java)
+* [Go](#go)
 
 * * *
 
@@ -163,16 +165,16 @@ Para habilitar o funcionamento do protocolo TLSv1.2 em seu sistema, a única coi
     $ mono Tls.exe
     ```
 
-  * On success:
+    * On success:
             
-            ```
-            Gerencianet_Connection_TLS1.2_OK!
-            ```
+        ```
+        Gerencianet_Connection_TLS1.2_OK!
+        ```
         
-        * On failure, an `URLError` is raised:
-            
-            ```
-            Failed!
+    * On failure, an `URLError` is raised:
+    
+        ```
+        Failed!
 
 * * *
 
@@ -201,3 +203,65 @@ Para habilitar o funcionamento do protocolo TLSv1.2 em seu sistema, a única coi
             ```
         
         * On failure, uma exceção `OpenSSL::SSL::SSLError` or `EOFError` é lançada.
+
+* * *
+
+## Java
+
+#### Requisitos
+
+Na versão 1.6 do Java, o TLS v1.2 está disponível a partir da atualização de número 11. Caso necessário, atualize JDK de seu servidor, as versões mais recentes estão disponíveis [aqui](http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase6-419409.html). 
+
+Na versão 1.7 e 1.8 do Java  o suporte para TLS v1.2 é nativo. 
+
+A habilitação deste recurso depende do servidor que sua aplicação está utilizando. 
+
+##### Vericando se o seu servidor é capaz de realizar requisições utilizando o TLS v.12
+
+Obtenha o arquivo .jar [aqui](Java/).
+
+##### Windows:
+  Dê um duplo clique sobre o arquivo tls.jar
+
+##### Linux:
+  - Execute o comando a partir do terminal na pasta que contém o arquivo tls.jar
+    ```
+    $ java -jar tls.jar
+    ```
+    Classe completa [aqui](Java/tls.java)
+
+    * On success:
+            
+        ```
+        Successfully connected to TLS 1.2 endpoint.
+        ```
+        
+    * On failure, an `URLError` is raised:
+    
+        ```
+        Failed to connect to TLS 1.2 endpoint.
+
+* * *
+
+## Go
+
+#### Requisitos
+
+* Go usa o OpenSSL fornecido pelo sistema.
+* TLSv1.2 precisa da versão OpenSSL 1.0.1c ou superior.
+
+#### Executando exemplo em Go
+
+1. Baixe o arquivo `tls.go` do nosso [repositório](Go/).
+2. Coloque-o em seu servidor, e execute-o com o comando `go run tls.go`
+
+    * On success:    
+        ```
+        Gerencianet_Connection_TLS1.2_OK!
+        ```
+        
+    * On failure:
+        ```
+        Fatalln `err`
+
+* * *

@@ -17,6 +17,7 @@ Para cada linguagem de programação, existe um guia diferente, para que você d
 * [Ruby](#ruby)
 * [Java](#java)
 * [Go](#go)
+* [Delphi](#delphi)
 
 * * *
 
@@ -265,3 +266,33 @@ Obtenha o arquivo .jar [aqui](Java/).
         Fatalln `err`
 
 * * *
+
+## Delphi
+
+#### Requisitos
+*Para habilitar o funcionamento do protocolo TLSv1.2 em seu sistema, a única coisa necessária é utilizar a versão mais recente do Mono(linux) ou .NET Framework (maior que 4.5, recomendado >= 4.6.2).
+*Confira a relação completa da compatibilidade de sistemas operacionais nesta [tabela](Delphi/windows-tls12.png).
+
+#### Verificando suas versões de .NET e TLS
+
+1. Execute o arquivo `Tls.exe`, que pode ser encontrado clicando [aqui](Delphi/):
+
+##### Windows:
+  Execute o arquivo como qualquer outro `.exe` normalmente.
+
+##### Linux:
+  - Execute o comando a partir do `mono` da seguinte maneira:
+    ```
+    $ mono Tls.exe
+    ```
+
+    * On success:
+            
+        ```
+        Gerencianet_Connection_TLS1.2_OK!
+        ```
+        
+    * On failure, an `URLError` is raised:
+    
+        ```
+        Failed!

@@ -1,15 +1,7 @@
 import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLParameters;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URL;
-import java.net.UnknownHostException;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
-
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 public class tls {
 
@@ -20,41 +12,33 @@ public class tls {
 	 */
 	public static boolean isSuccessfulTLS12Connection() {
 		try {
-			SSLContext sslContext = SSLContext.getInstance("TLS");
-			sslContext.init(null, null, null);
-			HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
-
 			URL url = new URL("https://tls.testegerencianet.com.br/");
 			HttpsURLConnection httpsConnection = (HttpsURLConnection) url.openConnection();
+			httpsConnection.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
+      httpsConnection.setRequestMethod("GET");
 
-			httpsConnection.connect();
+			int status = httpsConnection.getResponseCode();
+
 			BufferedReader reader = new BufferedReader(new InputStreamReader(httpsConnection.getInputStream()));
-			StringBuilder body = new StringBuilder();
-			while (reader.ready()) {
-				body.append(reader.readLine());
+			String input;
+			StringBuffer body = new StringBuffer();
+			while ((input = reader.readLine()) !=null) {
+				body.append(input);
 			}
 			httpsConnection.disconnect();
-			if (body.toString().equals("Gerencianet_Connection_TLS1.2_OK!")) {
+
+			if (body.toString().equals("Gerencianet_Connection_TLS1.2_OK!") && status == 200) {
 				return true;
 			}
 
-		} catch (NoSuchAlgorithmException e) {
-		} catch (UnknownHostException e) {
-		} catch (IOException e) {
-		} catch (KeyManagementException e) {
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
 		}
 		return false;
 	}
 
 	public static void main(String[] args) {
-		try {
-			SSLParameters sslParams = SSLContext.getDefault().getSupportedSSLParameters();
-			String[] protocols = sslParams.getProtocols();
-			System.out.println("Supported protocol versions: " + Arrays.asList(protocols));
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-
 		if (isSuccessfulTLS12Connection()) {
 			System.out.println("Successfully connected to TLS 1.2 endpoint.");
 		} else {

@@ -17,7 +17,7 @@ begin
   HttpClient := THTTPClient.Create;
 
   try
-
+    HttpClient.UserAgent := 'User-Agent:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36';
     HttpResponse := HttpClient.Get('https://tls.testegerencianet.com.br');
     Result := HttpResponse.ContentAsString();
     Writeln(Result);
